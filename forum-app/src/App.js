@@ -1,39 +1,22 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Nav from './Components/Nav';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Home from './Pages/home'
+import Post from './Pages/Post'
+import Posts from './Pages/Posts'
 
-import Header from './Header';
-import Input from './Input'
-import RenderResults from './Results';
-import Nav from './Nav';
-import { CardDeck } from 'react-bootstrap';
-import { Container } from 'react-bootstrap';
-
-class App extends Component {
-
-  state = {
-    data: []
-  }
-
-  getData = (dataFromChild) => {
-    this.setState({ data: dataFromChild })
-  }
-
-  render() {
-    return (
+function App() {
+  return (
+    <Router>
       <div>
         <Nav/>
-        <Header />
-        <Container>
-          <Input giveData={this.getData} />
-          <CardDeck>
-            <RenderResults results={this.state.data} />
-          </CardDeck>
-        </Container>
+          <Route exact path="/" component={Home} />
       </div>
-    )
-  }
+    </Router>
+  );
 }
 
 export default App;
+
+
