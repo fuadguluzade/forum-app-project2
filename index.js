@@ -19,3 +19,5 @@ const routes = require('./routes');
 //app.use takes 2 parameter, routes, function for use, if not pass  first route
 //app.use('/', routes) prebuilt
 app.use(routes);
+
+app.listen(PORT)

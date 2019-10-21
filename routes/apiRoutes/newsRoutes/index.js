@@ -35,16 +35,16 @@ const newsController = require('./../../../controllers/newsController')
 // --------------------------------
 
 router.route('/')
-    .get(newsController.getBlogs)
-    .post(newsController.createBlog)
+    .get(newsController.getNews)
+    .post(newsController.createNew)
 
 router.route('/:newsId')
-    .get(newsController.getBlog)
-    .delete(newsController.deleteBlog)
+    .get(newsController.getNew)
+    .delete(newsController.deleteNews)
     .post(newsController.addComment)
 
 
 router.route('/comments/:newsId')
-    .get(newsController.getBlogsComments)
+    .get(newsController.getNewsComments)
     
 module.exports = router;
