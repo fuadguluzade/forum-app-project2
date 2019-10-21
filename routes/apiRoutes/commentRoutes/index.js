@@ -21,6 +21,9 @@ const commentsController = require('./../../../controllers/commentsController')
 router.route('/')
     .get(commentsController.getComments)
 
+router.route('/:newsId')
+    .get(commentsController.getNewsComments)
+
 
 // /api
 module.exports =router;
