@@ -39,19 +39,19 @@ class App extends Component {
     handleInputChange = event => {
         const name = event.target.name;
         const value = event.target.value;
-        console.log(this.state.sources.find(obj => obj.getString(value)))
+        const a = this.state.sources.find(source => source[value])[value]
+        console.log('a=',a)
         if (name === "source") {
-            this.setState({
-                source: this.state.sources.find(obj => Object.values(obj))
+            this.setState({                
+                source: a
             })
-            // console.log('source='+this.state.source)
+            
         }
 
         if (name === "language") {
             this.setState({
-                language: this.state.languages[Object.keys(value)]
+                language: this.state.languages.find(language => language[value])[value]
             })
-            // console.log('language='+this.state.language)
         } else {
             this.setState({
                 [name]: value
@@ -62,8 +62,8 @@ class App extends Component {
     handleFormSubmit = event => {
         event.preventDefault();
         let query = `q=${this.state.queryWord}&`;
-        // console.log(this.state.source)
-        // console.log(this.state.language)
+        console.log('source='+this.state.source)
+        console.log('language='+this.state.language)
         // API.getNews(query)
         //     .then(response => {
         //         this.setState({ data: response.data.articles });
