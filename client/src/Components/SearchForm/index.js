@@ -11,7 +11,7 @@ function SearchForm(props) {
                 <Form>
                     <Form.Group controlId="query">
                         <Form.Label>Enter the keyword to get the topics</Form.Label>
-                        <Form.Control onChange={props.handleInputChange} type="text" placeholder="Keyword" name="queryWord"/>
+                        <Form.Control onChange={props.handleInputChange} type="text" placeholder="Keyword" name="queryWord" />
                     </Form.Group>
 
                     <Form.Group id="qInTitle">
@@ -21,38 +21,27 @@ function SearchForm(props) {
                     <Form.Row>
                         <Form.Group as={Col}>
                             <Form.Label>Choose source country</Form.Label>
-                            <Form.Control
-                                onChange={props.handleInputChange}
-                                name="source"
-                                list="sources"
-                                type="text"
-                                className="form-control"
-                                placeholder="Source Country"
-                                id="source"
-                            />
-                            <datalist id="sources">
+                            <Form.Control as="select" name="source" onChange={props.handleInputChange}>
+                                <option>All coutries</option>
                                 {props.sources.map(source => (
-                                    <option value={Object.keys(source)} key={Object.keys(source)} />
+                                    <option key={Object.keys(source)}>
+                                        {Object.keys(source)}
+                                    </option>
                                 ))}
-                            </datalist>
+                            </Form.Control>
                         </Form.Group>
 
                         <Form.Group as={Col}>
                             <Form.Label>Choose article language</Form.Label>
-                            <Form.Control
-                                onChange={props.handleInputChange}
-                                name="language"
-                                list="languages"
-                                type="text"
-                                className="form-control"
-                                placeholder="All languages"
-                                id="language"
-                            />
-                            <datalist id="languages">
+                            <Form.Control as="select" name="language" onChange={props.handleInputChange}>
+                            <option>All languages</option>
                                 {props.languages.map(language => (
-                                    <option value={Object.keys(language)} key={Object.keys(language)} />
+                                    <option key={Object.keys(language)}>
+                                        {Object.keys(language)}
+                                    </option>
                                 ))}
-                            </datalist>
+                            </Form.Control>
+
                         </Form.Group>
 
                         <Form.Group as={Col}>
