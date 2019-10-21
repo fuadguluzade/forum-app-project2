@@ -44,7 +44,7 @@ router.route('/:newsId')
     .post(newsController.addComment)
 
 
-router.route('/comments/:newsId')
-    .get(newsController.getNewsComments)
+// router.route('/comments/:newsId')
+//     .get(newsController.getNewsComments)
     
 module.exports = router;
