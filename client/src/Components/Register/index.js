@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { login } from './../../Utils/UserFunction'
+import { register , login } from './../../Utils/UserFunction'
 
-class Login extends Component {
+class Register extends Component {
     constructor() {
         super()
         this.state = {
@@ -24,10 +24,18 @@ class Login extends Component {
             password: this.state.password
         }
 
-        login(user).then(res => {
+        register(user).then(res => {
             if (res) {
-                console.log(res)
-                this.props.history.push('/profile')
+                const user = {
+                    username: this.state.username,
+                    password: this.state.password
+                }
+
+                login(user).then(res => {
+                    if (res) {
+                        this.props.history.push('/profile')
+                    }
+                })
             }
         })
     }
@@ -39,7 +47,7 @@ class Login extends Component {
                     <div className='col-md-6 mt-5 mx-auto'>
                         <form noValidate onSubmit={this.onSubmit}>
                             <h1 className='h3 mb-3 font-weight-normal'>
-                                Please sign in
+                                Sign Up Today!
                             </h1>
                             <div className='form-group'>
                                 <label htmlFor='username'>Username</label>
@@ -63,7 +71,7 @@ class Login extends Component {
                             </div>
                             <button type='submit'
                                 className='btn btn-lg btn-primary btn-block'>
-                                Sign in
+                                Sign up
                             </button>
                         </form>
                     </div>
@@ -74,4 +82,4 @@ class Login extends Component {
     }
 }
 
-export default Login
+export default Register
