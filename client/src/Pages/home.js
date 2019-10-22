@@ -64,7 +64,8 @@ class Home extends Component {
                 if (response.data.status === "error") {
                     throw new Error(response.data.message);
                 }
-                this.setState({ data: response.data.articles, error: "" });
+                this.props.callBackFunc(response.data.articles)
+                this.setState({error: "" });
             })
             .catch(err => this.setState({ error: err.message }));
     };
@@ -91,7 +92,7 @@ class Home extends Component {
                         handleChange={this.handleChange}
                     />
                     <CardDeck>
-                        <RenderResults results={this.state.data} />
+                        <RenderResults results={this.props.data} />
                     </CardDeck>
                 </Container>
             </div>
