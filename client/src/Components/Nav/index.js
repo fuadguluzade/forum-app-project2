@@ -8,9 +8,10 @@ export default (props) => {
             <Navbar bg="dark" variant="dark">
                 <Link to='/'> <Navbar.Brand>Vox Populi</Navbar.Brand></Link>
                 <Nav className="mr-auto">
-                    <Nav.Link>Link1</Nav.Link>
-                    <Nav.Link>Link2</Nav.Link>
-                    <Nav.Link>Link3</Nav.Link>
+                    <Nav.Link href='/login'>Login</Nav.Link>
+                    <Nav.Link href='/register'>Register</Nav.Link>
+                    <Nav.Link href='/profile'>Profile</Nav.Link>
+                    <Nav.Link href='/favorites'>Favorites</Nav.Link>
                 </Nav>
             </Navbar>
         </div>
