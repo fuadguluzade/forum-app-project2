@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Nav from './Components/Nav';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './Pages/home'
@@ -16,7 +16,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/profile" component={Profile} />
-          
+          <Route exact path="/post/" component={Post} />
       </div>
     </Router>
   );
