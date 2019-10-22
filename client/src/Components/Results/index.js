@@ -12,15 +12,17 @@ const RenderResults = props => {
                 return (
                     <Row key={result.url}>
                         <Col>
-                            <Card style={{ width: '15rem' }} className='mb-3'>
-                                <Card.Img variant="top" src={result.urlToImage} />
-                                <Card.Header>{result.title}</Card.Header>
-                                <ListGroup variant="flush">
-                                    <ListGroup.Item>Author: {result.author}</ListGroup.Item>
-                                    <ListGroup.Item>Source: {result.source.name}</ListGroup.Item>
-                                    <ListGroup.Item>Date: {result.publishedAt}</ListGroup.Item>
-                                </ListGroup>
-                            </Card>
+                            <Link to={"/post"}>
+                                <Card style={{ width: '15rem' }} className='mb-3'>
+                                    <Card.Img variant="top" src={result.urlToImage} />
+                                    <Card.Header>{result.title}</Card.Header>
+                                    <ListGroup variant="flush">
+                                        <ListGroup.Item>Author: {result.author}</ListGroup.Item>
+                                        <ListGroup.Item>Source: {result.source.name}</ListGroup.Item>
+                                        <ListGroup.Item>Date: {result.publishedAt}</ListGroup.Item>
+                                    </ListGroup>
+                                </Card>
+                            </Link>
                         </Col>
                     </Row>
                 )
