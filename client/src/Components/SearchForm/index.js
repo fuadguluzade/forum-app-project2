@@ -15,26 +15,24 @@ function SearchForm(props) {
                     </Form.Group>
 
                     <Form.Group id="qInTitle">
-                        <Form.Check type="checkbox" label="In title only" />
+                        <Form.Check type="checkbox" label="In title only" onChange={props.handleChange}/>
                     </Form.Group>
 
                     <Form.Row>
                         <Form.Group as={Col}>
-                            <Form.Label>Choose source country</Form.Label>
-                            <Form.Control as="select" name="source" onChange={props.handleInputChange}>
-                                <option>All coutries</option>
-                                {props.sources.map(source => (
-                                    <option key={Object.keys(source)}>
-                                        {Object.keys(source)}
-                                    </option>
-                                ))}
+                            <Form.Label>Choose result count</Form.Label>
+                            <Form.Control as="select" name="pageSize" onChange={props.handleInputChange}>
+                                <option>20</option>
+                                <option>30</option>
+                                <option>40</option>
+                                <option>50</option>
                             </Form.Control>
                         </Form.Group>
 
                         <Form.Group as={Col}>
                             <Form.Label>Choose article language</Form.Label>
                             <Form.Control as="select" name="language" onChange={props.handleInputChange}>
-                            <option>All languages</option>
+                                <option></option>
                                 {props.languages.map(language => (
                                     <option key={Object.keys(language)}>
                                         {Object.keys(language)}
@@ -46,29 +44,14 @@ function SearchForm(props) {
 
                         <Form.Group as={Col}>
                             <Form.Label>Sort By</Form.Label>
-                            <Form.Control as="select">
+                            <Form.Control as="select" name="sortBy" onChange={props.handleInputChange}>
                                 <option>publishedAt</option>
                                 <option>relevancy</option>
                                 <option>popularity</option>
                             </Form.Control>
                         </Form.Group>
-
-
                     </Form.Row>
-
-                    <Form.Row>
-                        <Form.Group as={Col}>
-                            <Form.Label>Date From</Form.Label>
-                            <Form.Control type="date" placeholder="From" />
-                        </Form.Group>
-
-                        <Form.Group as={Col}>
-                            <Form.Label>Date To</Form.Label>
-                            <Form.Control type="date" placeholder="To" />
-                        </Form.Group>
-
-                    </Form.Row>
-
+                    
                     <Button onClick={props.handleFormSubmit} variant="primary">
                         Submit
                     </Button>
