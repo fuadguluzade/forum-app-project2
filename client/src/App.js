@@ -5,6 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './Pages/home'
 import Post from './Pages/Post'
 import Posts from './Pages/Posts'
+import Login from './Components/Login';
+import Profile from './Components/Profile';
 
 class App extends Component {
 
@@ -16,6 +18,8 @@ class App extends Component {
         <Nav />
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/profile" component={Profile} />
           <Route exact path="/post/" component={Post} />
           <Route exact path="/posts/" component={Posts} />
         </Switch>
