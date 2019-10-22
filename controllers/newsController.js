@@ -20,6 +20,7 @@ module.exports = {
         const query = `INSERT INTO news (news) VALUES(?)`;
         connection.query(query, news, (err, response) => {
             if (err) {
+                console.log(err);
                 return res.status(403).send(err);
             }
             res.send(response);
@@ -51,10 +52,12 @@ module.exports = {
     },
 
     addComment: (req, res)=> {
+        console.log(`hit`);
         const {newsId} = req.params;
         //pass the key as comment
+        console.log(req.body);
         const { newsComment } = req.body;
-        const query = `INSERT INTO comments(newsComment, blog_id) VALUES (?, ?)`;
+        const query = `INSERT INTO comments(newsComment, new_id) VALUES (?, ?)`;
         connection.query(query, [newsComment, newsId], (err, comments) => {
             if(err) {
                 return res.status(403).send(err);

@@ -15,6 +15,7 @@ module.exports = {
 
     getNewsComments: (req, res) => {
         console.log('i m hit on commentsController!');
+        console.log(`req.params comes from routes!!!`)
         const { newsId } = req.params;
         let query = `SELECT comments.id, newsComment FROM comments `
         query += `INNER JOIN news `
@@ -24,7 +25,7 @@ module.exports = {
             if (err) {
                 console.log(err);
                 // return res.status(403).send(err);
-            }
+            }   
             res.json(comments);
         })
     }
