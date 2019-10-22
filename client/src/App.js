@@ -8,6 +8,7 @@ import Posts from './Pages/Posts'
 import Login from './Components/Login';
 import Profile from './Components/Profile';
 import Register from './Components/Register';
+import Favorites from './Components/Favorites';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route exact path="/register" component={Register} />
           <Route exact path="/post/" component={Post} />
           <Route exact path="/posts/" component={Posts} />
+          <Route exact path="/favorites" component={Favorites}/>
       </div>
     </Router>
   );
