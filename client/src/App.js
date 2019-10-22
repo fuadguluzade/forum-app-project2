@@ -5,6 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './Pages/home'
 import Post from './Pages/Post'
 import Posts from './Pages/Posts'
+import Login from './Components/Login';
+import Profile from './Components/Profile';
 
 function App() {
   return (
@@ -12,6 +14,9 @@ function App() {
       <div>
         <Nav/>
           <Route exact path="/" component={Home} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/profile" component={Profile} />
+          
       </div>
     </Router>
   );
