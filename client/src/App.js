@@ -11,10 +11,14 @@ import Register from './Components/Register';
 import Favorites from './Components/Favorites';
 
 class App extends React.Component {
-  state = {
-    data: []
+  constructor(props){
+    super(props)
+    this.state = {
+      data: [],
+      log: false
+    }
+    this.login = this.login.bind(this);
   }
-
   callBackFunc = dataFromChild => {
     this.setState({ data: dataFromChild })
   }
@@ -36,12 +40,12 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-          <Nav />
+          <Nav log={this.state.log}/>
           <Switch>
             <Route exact path="/" render={() => <Home callBackFunc={this.callBackFunc} data={this.state.data} />}></Route>
             <Route exact path="/post/:id" render={() => <Post data={this.state.data} />}></Route>
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/profile" component={Profile} />
+            <Route exact path="/login" render={() => <Login action={this.login} log={this.state.log} />}></Route>
+            <Route exact path="/profile" render={() => <Profile action={this.login} log={this.state.log} />}></Route>
             <Route exact path="/register" component={Register} />
             <Route exact path="/post/" component={Post} />
             <Route exact path="/posts/" component={Posts} />
