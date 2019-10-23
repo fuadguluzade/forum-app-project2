@@ -9,7 +9,6 @@ import { Alert } from 'react-bootstrap';
 
 class Home extends Component {
     state = {
-        data: [],
         queryWord: '',
         qInTitle: false,
         pageSize: 20,

@@ -1,18 +1,24 @@
 import React, { Component } from 'react';
+import Article from '../Components/Article';
 
 class Post extends Component {
+    state = {
+        article: {}
+    }
     componentDidMount() {
-        let a = this.props;
-        console.log(a)
-
-        let b = this.props.match;
-        console.log(b)
+        const newsArray = JSON.parse(localStorage.getItem('newsData'));
+        const index = this.props.match.params.id;
+        this.setState({
+            article: newsArray[index]
+        })
     }
 
 
 
     render() {
-        return (<h1>Hello</h1>)
+        return (
+            <Article article={this.state.article}></Article>
+        )
     }
 }
 
