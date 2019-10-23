@@ -17,17 +17,18 @@ class App extends React.Component {
   }
 
   callBackFunc = dataFromChild => {
-    this.setState({ data: dataFromChild })
+    this.setState({ data: dataFromChild });
+    localStorage.clear();
+    localStorage.setItem('newsData', JSON.stringify(this.state.data));
   }
 
   render() {
-    console.log(this.state.data)
     return (
       <Router>
           <Nav />
           <Switch>
             <Route exact path="/" render={() => <Home callBackFunc={this.callBackFunc} data={this.state.data} />}></Route>
-            <Route exact path="/post/:id" render={() => <Post data={this.state.data} />}></Route>
+            <Route exact path="/post/:id" component={Post}></Route>
             <Route exact path="/login" component={Login} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/register" component={Register} />
