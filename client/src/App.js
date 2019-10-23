@@ -19,6 +19,18 @@ class App extends React.Component {
     this.setState({ data: dataFromChild })
   }
 
+  login() {
+    this.setState({
+      log: true
+    });
+  }
+
+  logout() {
+    this.setState({
+      log: false
+    });
+  }
+
   render() {
     console.log(this.state.data)
     return (
