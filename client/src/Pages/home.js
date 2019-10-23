@@ -3,9 +3,7 @@ import Header from '../Components/Header';
 import SearchForm from '../Components/SearchForm';
 import RenderResults from '../Components/Results';
 import API from '../Utils/API';
-import { Container } from 'react-bootstrap';
-import { CardDeck } from 'react-bootstrap';
-import { Alert } from 'react-bootstrap';
+import { Container, CardDeck, Alert } from 'react-bootstrap';
 
 class Home extends Component {
     state = {
@@ -64,8 +62,7 @@ class Home extends Component {
                 if (response.data.status === "error") {
                     throw new Error(response.data.message);
                 }
-                this.props.callBackFunc(response.data.articles)
-                this.setState({error: "" });
+                this.setState({error: "", data: response.data.articles });
             })
             .catch(err => this.setState({ error: err.message }));
     };
@@ -92,7 +89,7 @@ class Home extends Component {
                         handleChange={this.handleChange}
                     />
                     <CardDeck>
-                        <RenderResults results={this.props.data} />
+                        <RenderResults results={this.state.data} />
                     </CardDeck>
                 </Container>
             </div>

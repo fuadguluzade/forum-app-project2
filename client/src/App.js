@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { Component } from 'react';
+
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Nav from './Components/Nav';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './Pages/home'
 import Post from './Pages/Post'
-import Posts from './Pages/Posts'
+import CommentedPosts from './Pages/Posts'
 import Login from './Components/Login';
 import Profile from './Components/Profile';
 import Register from './Components/Register';
 import Favorites from './Components/Favorites';
+import Footer from './Components/Footer';
 
-class App extends React.Component {
+class App extends Component {
   constructor(props){
     super(props)
     this.state = {
@@ -36,22 +38,20 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.data)
     return (
       <Router>
-        <div>
           <Nav log={this.state.log}/>
           <Switch>
-            <Route exact path="/" render={() => <Home callBackFunc={this.callBackFunc} data={this.state.data} />}></Route>
-            <Route exact path="/post/:id" render={() => <Post data={this.state.data} />}></Route>
             <Route exact path="/login" render={() => <Login action={this.login} log={this.state.log} />}></Route>
             <Route exact path="/profile" render={() => <Profile action={this.login} log={this.state.log} />}></Route>
+            <Route exact path="/" component={Home}></Route>
+            <Route exact path="/post/:id" component={Post}></Route>
             <Route exact path="/register" component={Register} />
             <Route exact path="/post/" component={Post} />
-            <Route exact path="/posts/" component={Posts} />
+            <Route exact path="/posts/:id" component={CommentedPosts} />
             <Route exact path="/favorites" component={Favorites}/>
           </Switch>
-        </div>
+          <Footer/>
       </Router>
     );
   }
