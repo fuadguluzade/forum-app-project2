@@ -80,7 +80,7 @@ class Home extends Component {
             <div>
                 <Header />
 
-                <Container style={{position: "relative"}}>
+                <Container>
                     <Alert variant="danger" style={{ opacity: this.state.error ? 1 : 0, marginBottom: 10 }}>
                         {this.state.error}
                     </Alert>

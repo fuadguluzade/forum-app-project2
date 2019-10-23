@@ -39,6 +39,7 @@ class App extends Component {
 
   render() {
     return (
+      <div>      
       <Router>
           <Nav log={this.state.log}/>
           <Switch>
@@ -50,9 +51,10 @@ class App extends Component {
             <Route exact path="/post/" component={Post} />
             <Route exact path="/posts/:id" component={CommentedPosts} />
             <Route exact path="/favorites" component={Favorites}/>
-          </Switch>
-          <Footer/>
+          </Switch>          
       </Router>
+      <Footer/>
+      </div>
     );
   }
 }
