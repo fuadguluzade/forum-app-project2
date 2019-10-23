@@ -46,7 +46,7 @@ class App extends Component {
             <Route exact path="/login" render={() => <Login action={this.login} log={this.state.log} />}></Route>
             <Route exact path="/profile" render={() => <Profile action={this.login} log={this.state.log} />}></Route>
             <Route exact path="/" component={Home}></Route>
-            <Route exact path="/post/:id" component={Post}></Route>
+            <Route exact path="/post/:id" render={() => <Post log={this.state.log} />}></Route>
             <Route exact path="/register" component={Register} />
             <Route exact path="/post/" component={Post} />
             <Route exact path="/posts/:id" component={CommentedPosts} />
