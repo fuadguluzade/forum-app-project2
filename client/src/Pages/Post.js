@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Article from '../Components/Article';
 import TextArea from '../Components/TextArea'
+import { Container, Row, Col, ListGroup } from 'react-bootstrap';
+import { withRouter } from 'react-router-dom';
 
 class Post extends Component {
     state = {
@@ -14,16 +16,29 @@ class Post extends Component {
         })
     }
 
-
-
     render() {
+        const log = this.props.log
+        let commentArea;
+        if (log) {
+            commentArea = <TextArea />
+        } else {
+            commentArea = <Container>
+                <Row className="mb-3">
+                    <Col>
+                        <ListGroup>
+                            <ListGroup.Item>Login to Comment on this Article!</ListGroup.Item>
+                        </ListGroup>
+                    </Col>
+                </Row>
+            </Container>
+        }
         return (
-            <div style={{position: "relative"}}>
-            <Article article={this.state.article}></Article>
-            <TextArea/>
+            <div style={{ position: "relative" }}>
+                <Article article={this.state.article}></Article>
+                {commentArea}
             </div>
         )
     }
 }
 
-export default Post;
+export default withRouter(Post);
