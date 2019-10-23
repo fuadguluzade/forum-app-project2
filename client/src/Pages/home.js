@@ -63,6 +63,9 @@ class Home extends Component {
                     throw new Error(response.data.message);
                 }
                 this.setState({error: "", data: response.data.articles });
+            }).then(() => {
+                localStorage.clear();
+                localStorage.setItem('newsData', JSON.stringify(this.state.data));
             })
             .catch(err => this.setState({ error: err.message }));
     };
@@ -77,7 +80,7 @@ class Home extends Component {
             <div>
                 <Header />
 
-                <Container>
+                <Container style={{position: "relative"}}>
                     <Alert variant="danger" style={{ opacity: this.state.error ? 1 : 0, marginBottom: 10 }}>
                         {this.state.error}
                     </Alert>
