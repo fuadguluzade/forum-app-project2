@@ -13,16 +13,39 @@ import Favorites from './Components/Favorites';
 import Footer from './Components/Footer';
 
 class App extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      data: [],
+      log: false
+    }
+    this.login = this.login.bind(this);
+  }
+  callBackFunc = dataFromChild => {
+    this.setState({ data: dataFromChild })
+  }
+
+  login() {
+    this.setState({
+      log: true
+    });
+  }
+
+  logout() {
+    this.setState({
+      log: false
+    });
+  }
 
   render() {
     return (
       <Router>
-          <Nav />
+          <Nav log={this.state.log}/>
           <Switch>
+            <Route exact path="/login" render={() => <Login action={this.login} log={this.state.log} />}></Route>
+            <Route exact path="/profile" render={() => <Profile action={this.login} log={this.state.log} />}></Route>
             <Route exact path="/" component={Home}></Route>
             <Route exact path="/post/:id" component={Post}></Route>
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/profile" component={Profile} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/post/" component={Post} />
             <Route exact path="/posts/:id" component={CommentedPosts} />

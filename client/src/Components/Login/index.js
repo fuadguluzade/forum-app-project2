@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom';
 import { login } from './../../Utils/UserFunction'
 
 class Login extends Component {
@@ -18,7 +19,6 @@ class Login extends Component {
 
     onSubmit(e) {
         e.preventDefault()
-
         const user = {
             username: this.state.username,
             password: this.state.password
@@ -28,11 +28,13 @@ class Login extends Component {
             if (res) {
                 console.log(res)
                 this.props.history.push('/profile')
+                this.props.action()
             }
         })
     }
 
     render() {
+        console.log(this.props)
         return (
             <div className='container'>
                 <div className='row'>
@@ -74,4 +76,4 @@ class Login extends Component {
     }
 }
 
-export default Login
+export default withRouter(Login)
