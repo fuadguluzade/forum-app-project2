@@ -8,10 +8,10 @@ export default (props) => {
                 <Col>
                     <Form.Group>
                         <Form.Label>Comment</Form.Label>
-                        <Form.Control as="textarea" rows="5" />
+                        <Form.Control as="textarea" rows="5" onChange={props.handleInputChange}/>
                     </Form.Group>
                     <FormGroup>
-                        <Button variant="primary">
+                        <Button variant="primary" onClick={props.handleSubmit}>
                             Submit
                         </Button>
                     </FormGroup>
