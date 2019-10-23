@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Article from '../Components/Article';
+import TextArea from '../Components/TextArea'
+import { Container, Row, Col, ListGroup } from 'react-bootstrap';
+import { withRouter } from 'react-router-dom';
 import axios from 'axios';
-
 class Post extends Component {
     state = {
         article: {},
@@ -60,18 +62,12 @@ class Post extends Component {
             console.log(e)
         }
     }
-
-
+    
     render() {
-        return (
-            <div style={{position: "relative"}}>
-            <h1>News Detail Page</h1>
-            <Article article={this.state.article}></Article>
-            <h4>Comments</h4>
-                <ul>
-                    {this.renderComments() }
-                </ul>
-
+        const log = this.props.log
+        let commentArea;
+        if (log) {
+            commentArea =
                 <form>
                 <div className="form-group">
                         <label for="exampleInputComment">Leave a Comment</label>
@@ -87,9 +83,29 @@ class Post extends Component {
                     </div>
                     <button onClick={this.handleSubmit} type="submit" className="btn btn-primary">Submit</button>
                 </form>
+        } else {
+            commentArea = <Container>
+                <Row className="mb-3">
+                    <Col>
+                        <ListGroup>
+                            <ListGroup.Item>Login to Comment on this Article!</ListGroup.Item>
+                        </ListGroup>
+                    </Col>
+                </Row>
+            </Container>
+        }
+        return (
+            <div style={{ position: "relative" }}>
+          <h1>News Detail Page</h1>
+                <Article article={this.state.article}></Article>
+          <h4>Comments</h4>
+                <ul>
+                    {this.renderComments() }
+                </ul>
+                {commentArea}
             </div>
         )
     }
 }
 
-export default Post;
+export default withRouter(Post);
