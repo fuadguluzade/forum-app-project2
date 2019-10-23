@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Article from '../Components/Article';
+import TextArea from '../Components/TextArea'
 
 class Post extends Component {
     state = {
@@ -17,7 +18,10 @@ class Post extends Component {
 
     render() {
         return (
+            <div>
             <Article article={this.state.article}></Article>
+            <TextArea/>
+            </div>
         )
     }
 }

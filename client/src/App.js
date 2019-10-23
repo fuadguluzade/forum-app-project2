@@ -10,24 +10,16 @@ import Login from './Components/Login';
 import Profile from './Components/Profile';
 import Register from './Components/Register';
 import Favorites from './Components/Favorites';
+import Footer from './Components/Footer';
 
-class App extends React.Component {
-  state = {
-    data: []
-  }
-
-  callBackFunc = dataFromChild => {
-    this.setState({ data: dataFromChild });
-    localStorage.clear();
-    localStorage.setItem('newsData', JSON.stringify(this.state.data));
-  }
+class App extends Component {
 
   render() {
     return (
       <Router>
           <Nav />
           <Switch>
-            <Route exact path="/" render={() => <Home callBackFunc={this.callBackFunc} data={this.state.data} />}></Route>
+            <Route exact path="/" component={Home}></Route>
             <Route exact path="/post/:id" component={Post}></Route>
             <Route exact path="/login" component={Login} />
             <Route exact path="/profile" component={Profile} />
@@ -36,6 +28,7 @@ class App extends React.Component {
             <Route exact path="/posts/:id" component={CommentedPosts} />
             <Route exact path="/favorites" component={Favorites}/>
           </Switch>
+          <Footer/>
       </Router>
     );
   }

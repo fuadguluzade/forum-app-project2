@@ -1,9 +1,5 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
-import { Row } from 'react-bootstrap';
-import { Col } from 'react-bootstrap';
-import { Card } from 'react-bootstrap';
-import { ListGroup } from 'react-bootstrap';
+import { Container, Row, Col, Card, ListGroup } from 'react-bootstrap';
 
 export default (props) => {
     console.log(props.article)

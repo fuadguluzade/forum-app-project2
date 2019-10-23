@@ -1,9 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Card } from 'react-bootstrap';
-import { ListGroup } from 'react-bootstrap';
-import { Row } from 'react-bootstrap';
-import { Col } from 'react-bootstrap';
+import { Card, ListGroup, Row, Col } from 'react-bootstrap';
 
 const RenderResults = props => {
     if (props.results) {
