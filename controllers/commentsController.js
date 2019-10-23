@@ -28,5 +28,34 @@ module.exports = {
             }   
             res.json(comments);
         })
+    },
+
+    addComment: (req,res) => {
+        console.log(req.body)
+        rb = req.body
+        const query = `INSERT INTO articles(
+            author,
+            content,
+            title,
+            description,
+            publishedAt,
+            source,
+            url,
+            urlToImage
+        ) VALUES (?,?,?,?,?,?,?,?)`;
+        connection.query(query, [
+            rb.author,
+            rb.content,
+            rb.title,
+            rb.description,
+            rb.publishedAt,
+            rb.source,
+            rb.url,
+            rb.urlToImage], (err, article) => {
+            if(err) {
+                return res.status(403).send(err);
+            }
+            res.json(article);
+        })
     }
 }

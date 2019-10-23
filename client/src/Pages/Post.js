@@ -55,9 +55,21 @@ class Post extends Component {
         const { userCommentField: comment } = this.state;
         try {
             console.log('Heeh eee');
+            console.log(comment)
+            const article = this.state.article
             //why api is here??? send data find key, and send data......//req.body.newsComment
-            const response = await axios.post(`/api/news/${this.props.match.params.id}`, { newsComment: comment });
+            await axios.post(`/api/comments/`, { 
+                newsComment : comment, 
+                author: article.author, 
+                content: article.content,
+                title: article.title,
+                description: article.description,
+                publishedAt: article.publishedAt,
+                source: article.source.name,
+                url : article.url,
+                urlToImage : article.urlToImage} );
             this.getComments();
+            
         } catch (e) {
             console.log(e)
         }
