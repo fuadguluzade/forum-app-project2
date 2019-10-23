@@ -18,7 +18,7 @@ class Post extends Component {
 
     render() {
         return (
-            <div style={{position: "relative"}}>
+            <div>
             <Article article={this.state.article}></Article>
             <TextArea/>
             </div>

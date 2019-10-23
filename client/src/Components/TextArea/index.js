@@ -3,10 +3,10 @@ import { Form, Container, Row, Col, Button, FormGroup } from 'react-bootstrap';
 
 export default (props) => {
     return (
-        <Container>
+        <Container className="mb-5">
             <Row>
                 <Col>
-                    <Form.Group controlId="exampleForm.ControlTextarea1">
+                    <Form.Group>
                         <Form.Label>Comment</Form.Label>
                         <Form.Control as="textarea" rows="5" />
                     </Form.Group>
