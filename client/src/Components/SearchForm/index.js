@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button, Row, Col, Spinner } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 
 function SearchForm(props) {
     return (

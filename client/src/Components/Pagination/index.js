@@ -9,7 +9,7 @@ export default (props) => {
             pageNumbers.push(i);
         }
 
-        pageNumbers.map(number => {
+        pageNumbers.forEach(number => {
             items.push(<Pagination.Item key={number}
                 active={number === props.currentPage}
                 onClick={props.handlePageClick}
