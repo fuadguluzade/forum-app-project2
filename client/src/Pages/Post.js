@@ -125,7 +125,7 @@ class Post extends Component {
             // </form>
         } else {
             commentArea = <Container>
-                <Row className="mb-3">
+                <Row className="mb-5">
                     <Col>
                         <ListGroup>
                             <ListGroup.Item>Login to Comment on this Article!</ListGroup.Item>
@@ -137,7 +137,6 @@ class Post extends Component {
         return (
             <div style={{ position: "relative" }}>
                 <Article article={this.state.article}></Article>
-                <h4>Comments</h4>
                 <ul>
                     {this.renderComments()}
                 </ul>

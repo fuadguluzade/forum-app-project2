@@ -8,10 +8,6 @@ export default {
         return axios.get(url + queryUrl + key);
     },
 
-    getSources: function() {
-        return axios.get('./source_list.json')
-    },
-
     getLanguages: function() {
         return axios.get('./languages.json')
     }
