@@ -18,6 +18,7 @@ CREATE TABLE comments (
 	id INT AUTO_INCREMENT,
     newsComment TEXT NOT NULL,
     article_id INT NOT NULL,
+    username TEXT NOT NULL,
     PRIMARY KEY (id)
 );
 
