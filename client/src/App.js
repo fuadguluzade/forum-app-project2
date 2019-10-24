@@ -17,7 +17,7 @@ class App extends Component {
     super(props)
     this.state = {
       data: [],
-      log: true
+      log: false
     }
     this.login = this.login.bind(this);
   }
@@ -47,7 +47,7 @@ class App extends Component {
             <Route exact path="/profile" render={() => <Profile action={this.login} log={this.state.log} />}></Route>
             <Route exact path="/" component={Home}></Route>
             <Route exact path="/post/:id" render={() => <Post log={this.state.log} />}></Route>
-            <Route exact path="/register" component={Register} />
+            <Route exact path="/register" render={() => <Register action={this.login}/>}></Route>
             <Route exact path="/post/" component={Post} />
             <Route exact path="/posts/:id" component={CommentedPosts} />
             <Route exact path="/favorites" component={Favorites}/>
