@@ -3,6 +3,7 @@ import Header from '../Components/Header';
 import SearchForm from '../Components/SearchForm';
 import RenderResults from '../Components/Results';
 import Pagination from '../Components/Pagination'
+
 import API from '../Utils/API';
 import { Container, CardDeck, Alert } from 'react-bootstrap';
 
@@ -87,7 +88,6 @@ class Home extends Component {
         event.target.checked ? this.setState({ qInTitle: true }) : this.setState({ qInTitle: false })
     }
     
-
 
     render() {
         return (

@@ -12,7 +12,7 @@ const RenderResults = props => {
                 return (
                     <Row key={result.url}>
                         <Col>
-                            <Link to={`/post/${props.perPage * (props.currentPage - 1) + index}`}>
+                            <Link to={`/post/${props.perPage * (props.currentPage - 1) + index}`} onClick={props.handleArticleSubmit}>
                                 <Card style={{ width: '15rem' }} className='mb-3'>
                                     <Card.Img variant="top" src={result.urlToImage} />
                                     <Card.Header>{result.title}</Card.Header>

@@ -18,15 +18,56 @@ module.exports = {
         console.log(`req.params comes from routes!!!`)
         const { newsId } = req.params;
         let query = `SELECT comments.id, newsComment FROM comments `
-        query += `INNER JOIN news `
-        query += `ON comments.new_id = news.id `;
-        query += `WHERE new_id = ?`;
+        query += `INNER JOIN articles `
+        query += `ON comments.article_id = articles.id `;
+        query += `WHERE article_id = ?`;
         connection.query(query, parseInt(newsId), (err, comments) => {
             if (err) {
                 console.log(err);
                 // return res.status(403).send(err);
-            }   
+            }
             res.json(comments);
         })
+    },
+
+    getArticleComments: (req, res) => {
+        console.log('getting article comments...')
+        console.log(req.body)
+        const rb = req.body
+        const articleIDQuery = `SELECT id FROM articles WHERE ?`;
+        connection.query(articleIDQuery, { publishedAt: rb.publishedAt }, (err, id) => {
+            if (err) {
+                return res.status(403).send(err);
+            }
+            console.log(id)
+            let query = `SELECT comments.id, newsComment FROM comments `
+            query += `INNER JOIN articles `
+            query += `ON comments.article_id = articles.id `;
+            query += `WHERE article_id = ?`;
+            connection.query(query, id[0].id, (err, comments) => {
+                if (err) {
+                    return res.status(403).send(err);
+                }
+                res.json(comments);
+            })
+        })
+    },
+
+    addComment: (req, res) => {
+        const rb = req.body
+        const articleIDQuery = `SELECT id FROM articles WHERE ?`;
+        connection.query(articleIDQuery, { publishedAt: rb.publishedAt }, (err, id) => {
+            if (err) {
+                return res.status(403).send(err);
+            }
+            const commentQuery = `INSERT INTO comments(newsComment,article_id) VALUES (?,?)`
+            connection.query(commentQuery, [rb.newsComment, id[0].id], (err, comment) => {
+                if (err) {
+                    return res.status(403).send(err);
+                }
+                res.json(comment);
+            })
+        })
+
     }
 }
