@@ -3,13 +3,16 @@ import { Link } from 'react-router-dom';
 import { Card, ListGroup, Row, Col } from 'react-bootstrap';
 
 const RenderResults = props => {
-    if (props.results) {
+    if (props.results.length > 0) {
+        const lastCard = props.currentPage * props.perPage;
+        const firstCard = lastCard - props.perPage;
+        const currentCards = props.results.slice(firstCard, lastCard);
         return (
-            props.results.map((result, index) => {
+            currentCards.map((result, index) => {
                 return (
                     <Row key={result.url}>
                         <Col>
-                            <Link to={`/post/${index}`}>
+                            <Link to={`/post/${props.perPage * (props.currentPage - 1) + index}`}>
                                 <Card style={{ width: '15rem' }} className='mb-3'>
                                     <Card.Img variant="top" src={result.urlToImage} />
                                     <Card.Header>{result.title}</Card.Header>
@@ -25,7 +28,7 @@ const RenderResults = props => {
                 )
             })
         )
-    }
+    } else return ''
 }
 
 
