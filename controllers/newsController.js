@@ -13,24 +13,40 @@ module.exports = {
         });
     },
 
-    createNew: (req, res) => {
-        console.log('i am hit on newsController')
-        //destruct blog from req.body(from mysql)
-        const { news } = req.body;
-        const query = `INSERT INTO news (news) VALUES(?)`;
-        connection.query(query, news, (err, response) => {
-            if (err) {
-                console.log(err);
-                return res.status(403).send(err);
+    addNews: (req, res) => {
+        console.log(req.body)
+        const rb = req.body;
+        const query = `INSERT INTO articles(
+            author,
+            content,
+            title,
+            description,
+            publishedAt,
+            source,
+            url,
+            urlToImage
+        ) VALUES (?,?,?,?,?,?,?,?)`;
+        connection.query(query, [
+            rb.author,
+            rb.content,
+            rb.title,
+            rb.description,
+            rb.publishedAt,
+            rb.source,
+            rb.url,
+            rb.urlToImage], (err, article) => {
+                if (err) {
+                    return res.status(403).send(err);
+                }
+                res.json(article)
             }
-            res.send(response);
-        })
+        )
     },
 
     getNew: (req, res) => {
-        const {newsId} = req.params;
+        const { newsId } = req.params;
         const query = `SELECT * FROM news WHERE ?`;
-        connection.query(query, {id: newsId}, (err,blogs) => {
+        connection.query(query, { id: newsId }, (err, blogs) => {
             if (err) {
                 return res.status(404).send(err);
             }
@@ -41,30 +57,30 @@ module.exports = {
 
     //delete one
     deleteNews: (req, res) => {
-        const {newsId} = req.params;
+        const { newsId } = req.params;
         const query = `DELETE FROM news WHERE ?`;
-        connection.query(query, {id:newsId}, (err,result) => {
-            if(err) {
+        connection.query(query, { id: newsId }, (err, result) => {
+            if (err) {
                 return res.status(404).send(err);
             }
             res.json(result);
         })
     },
 
-    addComment: (req, res)=> {
+    addComment: (req, res) => {
         console.log(`hit`);
-        const {newsId} = req.params;
+        const { newsId } = req.params;
         //pass the key as comment
         console.log(req.body);
         const { newsComment } = req.body;
         const query = `INSERT INTO comments(newsComment, new_id) VALUES (?, ?)`;
         connection.query(query, [newsComment, newsId], (err, comments) => {
-            if(err) {
+            if (err) {
                 return res.status(403).send(err);
             }
             res.json(comments);
         })
     },
 
-    
+
 };

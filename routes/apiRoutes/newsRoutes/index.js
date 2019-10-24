@@ -36,7 +36,7 @@ const newsController = require('./../../../controllers/newsController')
 
 router.route('/')
     .get(newsController.getNews)
-    .post(newsController.createNew)
+    .post(newsController.addNews)
 
 router.route('/:newsId')
     .get(newsController.getNew)
@@ -44,7 +44,8 @@ router.route('/:newsId')
     .post(newsController.addComment)
 
 
+
 // router.route('/comments/:newsId')
 //     .get(newsController.getNewsComments)
-    
+
 module.exports = router;

@@ -18,7 +18,29 @@ class Post extends Component {
             article: newsArray[index]
         })
         this.getComments();
+        const sendArticle = async () => {
+            try {
+                const article = newsArray[index]
+                //why api is here??? send data find key, and send data......//req.body.newsComment
+                await axios.post(`/api/news/`, {
+                    author: article.author,
+                    content: article.content,
+                    title: article.title,
+                    description: article.description,
+                    publishedAt: article.publishedAt,
+                    source: article.source.name,
+                    url: article.url,
+                    urlToImage: article.urlToImage
+                });
+                this.getComments();
+    
+            } catch (e) {
+                console.log(e)
+            }
+        }
+        sendArticle();
     }
+
 
     getComments = async () => {
         console.log(this.props);
@@ -54,22 +76,21 @@ class Post extends Component {
         event.preventDefault();
         const { userCommentField: comment } = this.state;
         try {
-            console.log('Heeh eee');
-            console.log(comment)
             const article = this.state.article
             //why api is here??? send data find key, and send data......//req.body.newsComment
-            await axios.post(`/api/comments/`, { 
-                newsComment : comment, 
-                author: article.author, 
+            await axios.post(`/api/comments/`, {
+                newsComment: comment,
+                author: article.author,
                 content: article.content,
                 title: article.title,
                 description: article.description,
                 publishedAt: article.publishedAt,
                 source: article.source.name,
-                url : article.url,
-                urlToImage : article.urlToImage} );
+                url: article.url,
+                urlToImage: article.urlToImage
+            });
             this.getComments();
-            
+
         } catch (e) {
             console.log(e)
         }
@@ -84,21 +105,21 @@ class Post extends Component {
                     handleInputChange={this.handleInputChange}
                     handleSubmit={this.handleSubmit}
                 />
-                // <form>
-                //     <div className="form-group">
-                //         <label for="exampleInputComment">Leave a Comment</label>
-                //         <input
-                //             type="text"
-                //             //attach to the state//
-                //             value={this.state.userCommentField}
-                //             onChange={this.handleInputChange}
-                //             className="form-control"
-                //             id="exampleInputComment"
-                //             aria-describedby="emailHelp"
-                //             placeholder="Enter Comments" />
-                //     </div>
-                //     <button onClick={this.handleSubmit} type="submit" className="btn btn-primary">Submit</button>
-                // </form>
+            // <form>
+            //     <div className="form-group">
+            //         <label for="exampleInputComment">Leave a Comment</label>
+            //         <input
+            //             type="text"
+            //             //attach to the state//
+            //             value={this.state.userCommentField}
+            //             onChange={this.handleInputChange}
+            //             className="form-control"
+            //             id="exampleInputComment"
+            //             aria-describedby="emailHelp"
+            //             placeholder="Enter Comments" />
+            //     </div>
+            //     <button onClick={this.handleSubmit} type="submit" className="btn btn-primary">Submit</button>
+            // </form>
         } else {
             commentArea = <Container>
                 <Row className="mb-3">
