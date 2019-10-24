@@ -4,40 +4,53 @@ import TextArea from '../Components/TextArea'
 import { Container, Row, Col, ListGroup } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
+import jwt_decode from 'jwt-decode'
+
 class Post extends Component {
-    state = {
-        article: {},
-        // news: {},
-        comments: [],
-        userCommentField: ''
+    constructor() {
+        super()
+        this.state = {
+            article: {},
+            // news: {},
+            comments: [],
+            userCommentField: '',
+            username: ''
+        }
     }
-    componentDidMount() {
+    async componentWillMount() {
+        console.log(this.props.log)
+        if (this.props.log) {
+            const token = localStorage.usertoken
+            const decoded = jwt_decode(token)
+            this.setState({
+                username: decoded.username
+            })
+        }
         const newsArray = JSON.parse(localStorage.getItem('newsData'));
         const index = this.props.match.params.id;
         this.setState({
             article: newsArray[index]
         })
-        const sendArticle = async () => {
-            try {
-                const article = newsArray[index]
-                await axios.post(`/api/news/`, {
-                    author: article.author,
-                    content: article.content,
-                    title: article.title,
-                    description: article.description,
-                    publishedAt: article.publishedAt,
-                    source: article.source.name,
-                    url: article.url,
-                    urlToImage: article.urlToImage
-                });
-
-            } catch (e) {
-                console.log(e)
-            }
-        }
-        sendArticle();
+        try {
+            const article = newsArray[index]
+            await axios.post(`/api/news/`, {
+                author: article.author,
+                content: article.content,
+                title: article.title,
+                description: article.description,
+                publishedAt: article.publishedAt,
+                source: article.source.name,
+                url: article.url,
+                urlToImage: article.urlToImage
+            });
+        } catch (e) {
+            console.log(e)
+        }        
     }
 
+    async componentDidMount() {
+        this.getArticleComments();
+    }
 
     // getComments = async () => {
     //     console.log(this.props);
@@ -57,18 +70,27 @@ class Post extends Component {
 
     getArticleComments = async () => {
         try {
-            const commentResponse = await axios.post(`/api/comments/comment`,{publishedAt:this.state.article.publishedAt})
-            console.log(commentResponse.data)
-            
+            const commentResponse = await axios.post(`/api/comments/comment`, {
+                publishedAt: this.state.article.publishedAt
+            })
+            const articleComments = [];
+            for (let i = 0; i < commentResponse.data.length; i++) {
+                articleComments.push(commentResponse.data[i])
+            }
+            this.setState({
+                comments: articleComments
+            })
+            console.log(this.state.comments)
+
         } catch (error) {
             console.log(error)
         }
     }
 
-    renderComments = () => {
-        // return this.state.comments.map(comment => {
-        //     return <li key={comment.id}>{comment.newsComment}</li>
-        // })
+    renderPreviousComments = () => {
+        return this.state.comments.map((comment, index) => {
+            return <ListGroup.Item key={index}>{`${comment.username}: ${comment.newsComment}`}</ListGroup.Item>
+        })
     }
 
     handleInputChange = event => {
@@ -81,14 +103,15 @@ class Post extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
+        console.log(this.state.username)
         const sendComment = async () => {
             const { userCommentField: comment } = this.state;
             try {
                 const article = this.state.article
-                //why api is here??? send data find key, and send data......//req.body.newsComment
                 await axios.post(`/api/comments/`, {
                     newsComment: comment,
                     publishedAt: article.publishedAt,
+                    username: this.state.username
                 });
 
             } catch (e) {
@@ -96,7 +119,7 @@ class Post extends Component {
             }
         }
         sendComment();
-        this.getArticleComments();   
+        this.getArticleComments();
     }
 
     render() {
@@ -137,10 +160,17 @@ class Post extends Component {
         return (
             <div style={{ position: "relative" }}>
                 <Article article={this.state.article}></Article>
-                <ul>
-                    {this.renderComments()}
-                </ul>
-                {commentArea}
+                <Container>
+                    <Row className="mb-3">
+                        <Col>
+                            <h4>Comments</h4>
+                            <ListGroup>
+                                {this.renderPreviousComments()}
+                            </ListGroup>
+                            {commentArea}
+                        </Col>
+                    </Row>
+                </Container>
             </div>
         )
     }

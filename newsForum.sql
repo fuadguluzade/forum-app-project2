@@ -18,6 +18,7 @@ CREATE TABLE comments (
 	id INT AUTO_INCREMENT,
     newsComment TEXT NOT NULL,
     article_id INT NOT NULL,
+    username TEXT NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -25,8 +26,7 @@ CREATE TABLE users (
 	id INT AUTO_INCREMENT,
     username VARCHAR(100) NOT NULL,
     password VARCHAR(1000) NOT NULL,
-    PRIMARY KEY (id),
-	UNIQUE KEY unique_username (username)
+    PRIMARY KEY (id)
 );
 
 DROP TABLE articles;

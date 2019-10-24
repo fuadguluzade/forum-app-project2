@@ -40,7 +40,7 @@ module.exports = {
                 return res.status(403).send(err);
             }
             console.log(id)
-            let query = `SELECT comments.id, newsComment FROM comments `
+            let query = `SELECT newsComment, username FROM comments `
             query += `INNER JOIN articles `
             query += `ON comments.article_id = articles.id `;
             query += `WHERE article_id = ?`;
@@ -55,19 +55,22 @@ module.exports = {
 
     addComment: (req, res) => {
         const rb = req.body
+        console.log(rb);
         const articleIDQuery = `SELECT id FROM articles WHERE ?`;
-        connection.query(articleIDQuery, { publishedAt: rb.publishedAt }, (err, id) => {
+        connection.query(articleIDQuery, { publishedAt: rb.publishedAt }, (err, articleID) => {
             if (err) {
                 return res.status(403).send(err);
             }
-            const commentQuery = `INSERT INTO comments(newsComment,article_id) VALUES (?,?)`
-            connection.query(commentQuery, [rb.newsComment, id[0].id], (err, comment) => {
+            console.log(articleID[0].id)
+            const commentQuery = `INSERT INTO comments(newsComment,article_id,username) VALUES (?,?,?)`
+            connection.query(commentQuery, [rb.newsComment, articleID[0].id, rb.username], (err, comment) => {
                 if (err) {
                     return res.status(403).send(err);
                 }
                 res.json(comment);
             })
         })
+
 
     }
 }
