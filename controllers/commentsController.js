@@ -19,7 +19,7 @@ module.exports = {
         const { newsId } = req.params;
         let query = `SELECT comments.id, newsComment FROM comments `
         query += `INNER JOIN articles `
-        query += `ON comments.article_id = article_id `;
+        query += `ON comments.article_id = articles.id `;
         query += `WHERE article_id = ?`;
         connection.query(query, parseInt(newsId), (err, comments) => {
             if (err) {
@@ -33,19 +33,24 @@ module.exports = {
     getArticleComments: (req, res) => {
         console.log('getting article comments...')
         console.log(req.body)
-        res.json('hello')
-        // const { newsId } = req.params;
-        // let query = `SELECT comments.id, newsComment FROM comments `
-        // query += `INNER JOIN articles `
-        // query += `ON comments.article_id = article.id `;
-        // query += `WHERE article_id = ?`;
-        // connection.query(query, parseInt(newsId), (err, comments) => {
-        //     if (err) {
-        //         console.log(err);
-        //         // return res.status(403).send(err);
-        //     }
-        //     res.json(comments);
-        // })
+        const rb = req.body
+        const articleIDQuery = `SELECT id FROM articles WHERE ?`;
+        connection.query(articleIDQuery, { publishedAt: rb.publishedAt }, (err, id) => {
+            if (err) {
+                return res.status(403).send(err);
+            }
+            console.log(id)
+            let query = `SELECT comments.id, newsComment FROM comments `
+            query += `INNER JOIN articles `
+            query += `ON comments.article_id = articles.id `;
+            query += `WHERE article_id = ?`;
+            connection.query(query, id[0].id, (err, comments) => {
+                if (err) {
+                    return res.status(403).send(err);
+                }
+                res.json(comments);
+            })
+        })
     },
 
     addComment: (req, res) => {

@@ -20,7 +20,6 @@ class Post extends Component {
         const sendArticle = async () => {
             try {
                 const article = newsArray[index]
-                //why api is here??? send data find key, and send data......//req.body.newsComment
                 await axios.post(`/api/news/`, {
                     author: article.author,
                     content: article.content,
@@ -31,7 +30,7 @@ class Post extends Component {
                     url: article.url,
                     urlToImage: article.urlToImage
                 });
-    
+
             } catch (e) {
                 console.log(e)
             }
@@ -40,36 +39,30 @@ class Post extends Component {
     }
 
 
-    getComments = async () => {
-        console.log(this.props);
-        const { id } = this.props.match.params;
+    // getComments = async () => {
+    //     console.log(this.props);
+    //     const { id } = this.props.match.params;
+    //     try {
+    //         const newsResponse = await axios.get(`/api/news/${id}`)
+    //         const commentResponse = await axios.get(`/api/comments/${id}`)
+    //         console.log(commentResponse);
+    //         console.log(newsResponse);
+    //         const news = newsResponse.data;
+    //         const comments = commentResponse.data
+    //         this.setState({ news, comments, userCommentField: '' });
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
+
+    getArticleComments = async () => {
         try {
-            const newsResponse = await axios.get(`/api/news/${id}`)
-            const commentResponse = await axios.get(`/api/comments/${id}`)
-            console.log(commentResponse);
-            console.log(newsResponse);
-            const news = newsResponse.data;
-            const comments = commentResponse.data
-            this.setState({ news, comments, userCommentField: '' });
+            const commentResponse = await axios.post(`/api/comments/comment`,{publishedAt:this.state.article.publishedAt})
+            console.log(commentResponse.data)
+            
         } catch (error) {
             console.log(error)
         }
-    }
-
-    getArticleComments = () => {
-        console.log(`PROPS ${this.props}`);
-        // const { id } = this.props.match.params;
-        // try {
-        //     const newsResponse = await axios.get(`/api/news/${id}`)
-        //     const commentResponse = await axios.get(`/api/comments/${id}`)
-        //     console.log(commentResponse);
-        //     console.log(newsResponse);
-        //     const news = newsResponse.data;
-        //     const comments = commentResponse.data
-        //     this.setState({ news, comments, userCommentField: '' });
-        // } catch (error) {
-        //     console.log(error)
-        // }
     }
 
     renderComments = () => {
@@ -86,27 +79,24 @@ class Post extends Component {
 
     }
 
-    handleSubmit = async event => {
+    handleSubmit = event => {
         event.preventDefault();
-        const { userCommentField: comment } = this.state;
-        try {
-            const article = this.state.article
-            //why api is here??? send data find key, and send data......//req.body.newsComment
-            await axios.post(`/api/comments/`, {
-                newsComment: comment,
-                author: article.author,
-                content: article.content,
-                title: article.title,
-                description: article.description,
-                publishedAt: article.publishedAt,
-                source: article.source.name,
-                url: article.url,
-                urlToImage: article.urlToImage
-            });
+        const sendComment = async () => {
+            const { userCommentField: comment } = this.state;
+            try {
+                const article = this.state.article
+                //why api is here??? send data find key, and send data......//req.body.newsComment
+                await axios.post(`/api/comments/`, {
+                    newsComment: comment,
+                    publishedAt: article.publishedAt,
+                });
 
-        } catch (e) {
-            console.log(e)
+            } catch (e) {
+                console.log(e)
+            }
         }
+        sendComment();
+        this.getArticleComments();   
     }
 
     render() {
