@@ -45,7 +45,7 @@ class Post extends Component {
             });
         } catch (e) {
             console.log(e)
-        }        
+        }
     }
 
     async componentDidMount() {
@@ -147,21 +147,17 @@ class Post extends Component {
             //     <button onClick={this.handleSubmit} type="submit" className="btn btn-primary">Submit</button>
             // </form>
         } else {
-            commentArea = <Container>
-                <Row className="mb-5">
-                    <Col>
-                        <ListGroup>
-                            <ListGroup.Item>Login to Comment on this Article!</ListGroup.Item>
-                        </ListGroup>
-                    </Col>
-                </Row>
-            </Container>
+
+            commentArea =
+                <ListGroup>
+                    <ListGroup.Item>Login to Comment on this Article!</ListGroup.Item>
+                </ListGroup>
         }
         return (
             <div style={{ position: "relative" }}>
                 <Article article={this.state.article}></Article>
                 <Container>
-                    <Row className="mb-3">
+                    <Row className="mb-5">
                         <Col>
                             <h4>Comments</h4>
                             <ListGroup>
