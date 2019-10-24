@@ -70,7 +70,6 @@ class Home extends Component {
         let language = this.state.language ? `language=${this.state.language}&` : '';
         let sortBy = `sortBy=${this.state.sortBy}&`;
         let queryUrl = keyword + pageSize + language + sortBy;
-        console.log(queryUrl)
         API.getNews(queryUrl)
             .then(response => {
                 if (response.data.status === "error") {

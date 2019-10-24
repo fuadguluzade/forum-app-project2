@@ -2,7 +2,6 @@ import React from 'react';
 import { Container, Row, Col, Card, ListGroup } from 'react-bootstrap';
 
 export default (props) => {
-    console.log(props.article)
     return (
         <Container>
             <Row className="mb-3">

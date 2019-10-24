@@ -4,7 +4,6 @@ import { Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 export default (props) => {
     const log = props.log;
-    console.log(log)
     let logLink, profLink;
     if (log) {
         logLink = <Nav.Link href='/login'>Logout</Nav.Link>
