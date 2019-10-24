@@ -16,7 +16,7 @@ module.exports = {
     addNews: (req, res) => {
         console.log(req.body)
         const rb = req.body;
-        const query = `INSERT INTO articles(
+        const insertQuery = `INSERT INTO articles(
             author,
             content,
             title,
@@ -26,7 +26,7 @@ module.exports = {
             url,
             urlToImage
         ) VALUES (?,?,?,?,?,?,?,?)`;
-        connection.query(query, [
+        connection.query(insertQuery, [
             rb.author,
             rb.content,
             rb.title,

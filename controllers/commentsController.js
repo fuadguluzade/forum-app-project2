@@ -18,9 +18,9 @@ module.exports = {
         console.log(`req.params comes from routes!!!`)
         const { newsId } = req.params;
         let query = `SELECT comments.id, newsComment FROM comments `
-        query += `INNER JOIN news `
-        query += `ON comments.new_id = news.id `;
-        query += `WHERE new_id = ?`;
+        query += `INNER JOIN articles `
+        query += `ON comments.article_id = article_id `;
+        query += `WHERE article_id = ?`;
         connection.query(query, parseInt(newsId), (err, comments) => {
             if (err) {
                 console.log(err);
@@ -30,16 +30,32 @@ module.exports = {
         })
     },
 
-    addComment: (req, res) => {
+    getArticleComments: (req, res) => {
+        console.log('getting article comments...')
         console.log(req.body)
-        rb = req.boy
+        res.json('hello')
+        // const { newsId } = req.params;
+        // let query = `SELECT comments.id, newsComment FROM comments `
+        // query += `INNER JOIN articles `
+        // query += `ON comments.article_id = article.id `;
+        // query += `WHERE article_id = ?`;
+        // connection.query(query, parseInt(newsId), (err, comments) => {
+        //     if (err) {
+        //         console.log(err);
+        //         // return res.status(403).send(err);
+        //     }
+        //     res.json(comments);
+        // })
+    },
+
+    addComment: (req, res) => {
+        const rb = req.body
         const articleIDQuery = `SELECT id FROM articles WHERE ?`;
         connection.query(articleIDQuery, { publishedAt: rb.publishedAt }, (err, id) => {
             if (err) {
                 return res.status(403).send(err);
             }
-            console.log(id[0].id);
-            const commentQuery = `INSERT INTO comments(newsComment,new_id) VALUES (?,?)`
+            const commentQuery = `INSERT INTO comments(newsComment,article_id) VALUES (?,?)`
             connection.query(commentQuery, [rb.newsComment, id[0].id], (err, comment) => {
                 if (err) {
                     return res.status(403).send(err);

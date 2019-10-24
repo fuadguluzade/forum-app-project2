@@ -17,7 +17,6 @@ class Post extends Component {
         this.setState({
             article: newsArray[index]
         })
-        this.getComments();
         const sendArticle = async () => {
             try {
                 const article = newsArray[index]
@@ -32,7 +31,6 @@ class Post extends Component {
                     url: article.url,
                     urlToImage: article.urlToImage
                 });
-                this.getComments();
     
             } catch (e) {
                 console.log(e)
@@ -58,10 +56,26 @@ class Post extends Component {
         }
     }
 
+    getArticleComments = () => {
+        console.log(`PROPS ${this.props}`);
+        // const { id } = this.props.match.params;
+        // try {
+        //     const newsResponse = await axios.get(`/api/news/${id}`)
+        //     const commentResponse = await axios.get(`/api/comments/${id}`)
+        //     console.log(commentResponse);
+        //     console.log(newsResponse);
+        //     const news = newsResponse.data;
+        //     const comments = commentResponse.data
+        //     this.setState({ news, comments, userCommentField: '' });
+        // } catch (error) {
+        //     console.log(error)
+        // }
+    }
+
     renderComments = () => {
-        return this.state.comments.map(comment => {
-            return <li key={comment.id}>{comment.newsComment}</li>
-        })
+        // return this.state.comments.map(comment => {
+        //     return <li key={comment.id}>{comment.newsComment}</li>
+        // })
     }
 
     handleInputChange = event => {
@@ -89,7 +103,6 @@ class Post extends Component {
                 url: article.url,
                 urlToImage: article.urlToImage
             });
-            this.getComments();
 
         } catch (e) {
             console.log(e)
