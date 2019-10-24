@@ -17,7 +17,7 @@ class App extends Component {
     super(props)
     this.state = {
       data: [],
-      log: true
+      log: false
     }
     this.login = this.login.bind(this);
   }
