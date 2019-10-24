@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button, Row, Col } from 'react-bootstrap';
+import { Form, Button, Row, Col, Spinner } from 'react-bootstrap';
 
 function SearchForm(props) {
     return (
@@ -17,12 +17,12 @@ function SearchForm(props) {
 
                     <Form.Row>
                         <Form.Group as={Col}>
-                            <Form.Label>Choose result count</Form.Label>
-                            <Form.Control as="select" name="pageSize" onChange={props.handleInputChange}>
-                                <option>20</option>
+                            <Form.Label>Results on page</Form.Label>
+                            <Form.Control as="select" name="perPage" onChange={props.handleValidation}>
+                                <option>10</option>
                                 <option>30</option>
-                                <option>40</option>
                                 <option>50</option>
+                                <option>70</option>
                             </Form.Control>
                         </Form.Group>
 

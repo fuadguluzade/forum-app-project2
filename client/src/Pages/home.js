@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Header from '../Components/Header';
 import SearchForm from '../Components/SearchForm';
-import Results from '../Components/Results';
+import RenderResults from '../Components/Results';
+import Pagination from '../Components/Pagination'
+
 import API from '../Utils/API';
 import { Container, CardDeck, Alert } from 'react-bootstrap';
 
@@ -10,7 +12,10 @@ class Home extends Component {
         data: [],
         queryWord: '',
         qInTitle: false,
-        pageSize: 20,
+        pageSize: 100,
+        perPage: 10,
+        currentPage: 1,
+        loading: false,
         language: '',
         languages: [],
         sortBy: 'publishedAt',
@@ -47,6 +52,15 @@ class Home extends Component {
         }
     };
 
+    handleValidation = event => {
+        this.setState({currentPage: 1, perPage: event.target.value})
+    }
+
+    handlePageClick = event => {
+        event.preventDefault();
+        this.setState({currentPage: Number(event.target.textContent.match(/\d+/g))})
+    }
+
     handleFormSubmit = (event) => {
         event.preventDefault();
         let query = `q=${this.state.queryWord}&`;
@@ -73,6 +87,7 @@ class Home extends Component {
     handleChange = event => {
         event.target.checked ? this.setState({ qInTitle: true }) : this.setState({ qInTitle: false })
     }
+    
 
     render() {
         return (
@@ -89,10 +104,14 @@ class Home extends Component {
                         languages={this.state.languages}
                         qInTitle={this.qInTitle}
                         handleChange={this.handleChange}
+                        handleValidation={this.handleValidation}
                     />
                     <CardDeck>
-                        <Results results={this.state.data}/>
+                        <RenderResults results={this.state.data} 
+                        perPage={this.state.perPage} 
+                        currentPage={this.state.currentPage} />
                     </CardDeck>
+                    <Pagination results={this.state.data} perPage={this.state.perPage} handlePageClick={this.handlePageClick} currentPage={this.state.currentPage}/>
                 </Container>
             </div>
         )
