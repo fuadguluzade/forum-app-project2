@@ -9,7 +9,7 @@ const RenderResults = props => {
                 return (
                     <Row key={result.url}>
                         <Col>
-                            <Link to={`/post/${index}`}>
+                            <Link to={`/post/${index}`} onClick={props.handleArticleSubmit}>
                                 <Card style={{ width: '15rem' }} className='mb-3'>
                                     <Card.Img variant="top" src={result.urlToImage} />
                                     <Card.Header>{result.title}</Card.Header>

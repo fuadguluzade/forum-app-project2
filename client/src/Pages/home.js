@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../Components/Header';
 import SearchForm from '../Components/SearchForm';
-import RenderResults from '../Components/Results';
+import Results from '../Components/Results';
 import API from '../Utils/API';
 import { Container, CardDeck, Alert } from 'react-bootstrap';
 
@@ -74,7 +74,6 @@ class Home extends Component {
         event.target.checked ? this.setState({ qInTitle: true }) : this.setState({ qInTitle: false })
     }
 
-
     render() {
         return (
             <div>
@@ -92,7 +91,7 @@ class Home extends Component {
                         handleChange={this.handleChange}
                     />
                     <CardDeck>
-                        <RenderResults results={this.state.data} />
+                        <Results results={this.state.data}/>
                     </CardDeck>
                 </Container>
             </div>
