@@ -55,19 +55,28 @@ module.exports = {
 
     addComment: (req, res) => {
         const rb = req.body
-        const articleIDQuery = `SELECT id FROM articles WHERE ?`;
-        connection.query(articleIDQuery, { publishedAt: rb.publishedAt }, (err, id) => {
+        console.log(rb);
+        const userIDQuery = `SELECT id FROM users WHERE ?`
+        connection.query(userIDQuery, { username: rb.username }, (err, userID) => {
             if (err) {
                 return res.status(403).send(err);
             }
-            const commentQuery = `INSERT INTO comments(newsComment,article_id) VALUES (?,?)`
-            connection.query(commentQuery, [rb.newsComment, id[0].id], (err, comment) => {
+            console.log(userID[0].id)
+            const articleIDQuery = `SELECT id FROM articles WHERE ?`;
+            connection.query(articleIDQuery, { publishedAt: rb.publishedAt }, (err, articleID) => {
                 if (err) {
                     return res.status(403).send(err);
                 }
-                res.json(comment);
+                console.log(articleID[0].id)
+                const commentQuery = `INSERT INTO comments(newsComment,article_id,user_id) VALUES (?,?,?)`
+                connection.query(commentQuery, [rb.newsComment, articleID[0].id,userID[0].id], (err, comment) => {
+                    if (err) {
+                        return res.status(403).send(err);
+                    }
+                    res.json(comment);
+                })
             })
-        })
 
+        })
     }
 }

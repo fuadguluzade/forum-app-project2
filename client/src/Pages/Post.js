@@ -4,14 +4,28 @@ import TextArea from '../Components/TextArea'
 import { Container, Row, Col, ListGroup } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
+import jwt_decode from 'jwt-decode'
+
 class Post extends Component {
-    state = {
-        article: {},
-        // news: {},
-        comments: [],
-        userCommentField: ''
+    constructor() {
+        super()
+        this.state = {
+            article: {},
+            // news: {},
+            comments: [],
+            userCommentField: '',
+            username: ''
+        }
     }
     componentDidMount() {
+        console.log(this.props.log)
+        if (this.props.log) {
+            const token = localStorage.usertoken
+            const decoded = jwt_decode(token)
+            this.setState({
+                username: decoded.username
+            })
+        }
         const newsArray = JSON.parse(localStorage.getItem('newsData'));
         const index = this.props.match.params.id;
         this.setState({
@@ -57,9 +71,11 @@ class Post extends Component {
 
     getArticleComments = async () => {
         try {
-            const commentResponse = await axios.post(`/api/comments/comment`,{publishedAt:this.state.article.publishedAt})
+            const commentResponse = await axios.post(`/api/comments/comment`, {
+                publishedAt: this.state.article.publishedAt
+            })
             console.log(commentResponse.data)
-            
+
         } catch (error) {
             console.log(error)
         }
@@ -81,6 +97,7 @@ class Post extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
+        console.log(this.state.username)
         const sendComment = async () => {
             const { userCommentField: comment } = this.state;
             try {
@@ -89,6 +106,7 @@ class Post extends Component {
                 await axios.post(`/api/comments/`, {
                     newsComment: comment,
                     publishedAt: article.publishedAt,
+                    username: this.state.username
                 });
 
             } catch (e) {
@@ -96,7 +114,7 @@ class Post extends Component {
             }
         }
         sendComment();
-        this.getArticleComments();   
+        this.getArticleComments();
     }
 
     render() {

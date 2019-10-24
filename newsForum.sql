@@ -25,8 +25,7 @@ CREATE TABLE users (
 	id INT AUTO_INCREMENT,
     username VARCHAR(100) NOT NULL,
     password VARCHAR(1000) NOT NULL,
-    PRIMARY KEY (id),
-	UNIQUE KEY unique_username (username)
+    PRIMARY KEY (id)
 );
 
 DROP TABLE articles;

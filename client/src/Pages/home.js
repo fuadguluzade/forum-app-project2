@@ -64,7 +64,7 @@ class Home extends Component {
                 }
                 this.setState({error: "", data: response.data.articles });
             }).then(() => {
-                localStorage.clear();
+                localStorage.removeItem('newsData');
                 localStorage.setItem('newsData', JSON.stringify(this.state.data));
             })
             .catch(err => this.setState({ error: err.message }));
