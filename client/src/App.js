@@ -5,7 +5,6 @@ import Nav from './Components/Nav';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './Pages/home'
 import Post from './Pages/Post'
-import CommentedPosts from './Pages/Posts'
 import Login from './Components/Login';
 import Profile from './Components/Profile';
 import Register from './Components/Register';
@@ -49,7 +48,6 @@ class App extends Component {
             <Route exact path="/post/:id" render={() => <Post log={this.state.log} />}></Route>
             <Route exact path="/register" render={() => <Register action={this.login}/>}></Route>
             <Route exact path="/post/" component={Post} />
-            <Route exact path="/posts/:id" component={CommentedPosts} />
             <Route exact path="/favorites" component={Favorites}/>
           </Switch>          
       </Router>

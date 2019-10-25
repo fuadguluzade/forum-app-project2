@@ -11,14 +11,12 @@ class Post extends Component {
         super()
         this.state = {
             article: {},
-            // news: {},
             comments: [],
             userCommentField: '',
             username: ''
         }
     }
     async componentWillMount() {
-        console.log(this.props.log)
         if (this.props.log) {
             const token = localStorage.usertoken
             const decoded = jwt_decode(token)
@@ -94,11 +92,8 @@ class Post extends Component {
     }
 
     handleInputChange = event => {
-        //pull put value
         const { value } = event.target;
         this.setState({ userCommentField: value });
-        //make a post request...why???
-
     }
 
     handleSubmit = event => {
@@ -131,23 +126,7 @@ class Post extends Component {
                     handleInputChange={this.handleInputChange}
                     handleSubmit={this.handleSubmit}
                 />
-            // <form>
-            //     <div className="form-group">
-            //         <label for="exampleInputComment">Leave a Comment</label>
-            //         <input
-            //             type="text"
-            //             //attach to the state//
-            //             value={this.state.userCommentField}
-            //             onChange={this.handleInputChange}
-            //             className="form-control"
-            //             id="exampleInputComment"
-            //             aria-describedby="emailHelp"
-            //             placeholder="Enter Comments" />
-            //     </div>
-            //     <button onClick={this.handleSubmit} type="submit" className="btn btn-primary">Submit</button>
-            // </form>
         } else {
-
             commentArea =
                 <ListGroup>
                     <ListGroup.Item>Login to Comment on this Article!</ListGroup.Item>
