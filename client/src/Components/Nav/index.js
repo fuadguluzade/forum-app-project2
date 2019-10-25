@@ -19,7 +19,6 @@ export default (props) => {
                 <Nav className="mr-auto">
                     {logLink}
                     {profLink}
-                    <Nav.Link href='/favorites'>Favorites</Nav.Link>
                     <Nav.Link href='/register'>Register</Nav.Link>
                 </Nav>
             </Navbar>
