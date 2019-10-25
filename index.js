@@ -26,7 +26,7 @@ app.use(routes);
 app.use('/users', Users)
 
 app.get('*', (req,res) =>{
-    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+    res.sendFile(path.join(__dirname+'/client/public/index.html'));
 });
 
 app.listen(PORT)
