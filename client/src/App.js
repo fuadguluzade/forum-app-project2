@@ -5,7 +5,6 @@ import Nav from './Components/Nav';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './Pages/home'
 import Post from './Pages/Post'
-import CommentedPosts from './Pages/Posts'
 import Login from './Components/Login';
 import Profile from './Components/Profile';
 import Register from './Components/Register';

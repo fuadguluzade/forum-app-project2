@@ -15,7 +15,6 @@ class Home extends Component {
         pageSize: 100,
         perPage: 10,
         currentPage: 1,
-        loading: false,
         language: '',
         languages: [],
         sortBy: 'publishedAt',
