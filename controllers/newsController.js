@@ -2,6 +2,20 @@ const connection = require('../config/connection');
 
 //exports an object
 module.exports = {
+    getUserNews: (req, res) => {
+        const rb = req.body
+        console.log(rb.username)
+        let query = `SELECT * FROM articles `
+        query += `INNER JOIN comments `
+        query += `ON articles.id = comments.article_id `;
+        query += `WHERE comments.username = ?`;
+        connection.query(query, rb.username, (err, articles) => {
+            if (err) {
+                return res.status(403).send(err);
+            }
+            res.json(articles);
+        })
+    },
     getNews: (req, res) => {
         const query = `SELECT * FROM news;`;
         connection.query(query, (err, news) => {
@@ -67,20 +81,20 @@ module.exports = {
         })
     },
 
-    addComment: (req, res) => {
-        console.log(`hit`);
-        const { newsId } = req.params;
-        //pass the key as comment
-        console.log(req.body);
-        const { newsComment } = req.body;
-        const query = `INSERT INTO comments(newsComment, new_id) VALUES (?, ?)`;
-        connection.query(query, [newsComment, newsId], (err, comments) => {
-            if (err) {
-                return res.status(403).send(err);
-            }
-            res.json(comments);
-        })
-    },
+    // addComment: (req, res) => {
+    //     console.log(`hit`);
+    //     const { newsId } = req.params;
+    //     //pass the key as comment
+    //     console.log(req.body);
+    //     const { newsComment } = req.body;
+    //     const query = `INSERT INTO comments(newsComment, new_id) VALUES (?, ?)`;
+    //     connection.query(query, [newsComment, newsId], (err, comments) => {
+    //         if (err) {
+    //             return res.status(403).send(err);
+    //         }
+    //         res.json(comments);
+    //     })
+    // },
 
 
 };

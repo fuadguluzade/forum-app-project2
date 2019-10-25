@@ -41,9 +41,10 @@ router.route('/')
 router.route('/:newsId')
     .get(newsController.getNew)
     .delete(newsController.deleteNews)
-    .post(newsController.addComment)
+    .post(newsController.getUserNews)
 
-
+router.route('/user')
+    .post(newsController.getUserNews)
 
 // router.route('/comments/:newsId')
 //     .get(newsController.getNewsComments)

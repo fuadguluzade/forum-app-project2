@@ -9,7 +9,6 @@ import CommentedPosts from './Pages/Posts'
 import Login from './Components/Login';
 import Profile from './Components/Profile';
 import Register from './Components/Register';
-import Favorites from './Components/Favorites';
 import Footer from './Components/Footer';
 
 class App extends Component {
@@ -50,7 +49,6 @@ class App extends Component {
             <Route exact path="/register" render={() => <Register action={this.login}/>}></Route>
             <Route exact path="/post/" component={Post} />
             <Route exact path="/posts/:id" component={CommentedPosts} />
-            <Route exact path="/favorites" component={Favorites}/>
           </Switch>          
       </Router>
       <Footer/>
