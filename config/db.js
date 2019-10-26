@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = {}
-const sequelize = new Sequelize('newsforum_db','root','password',{
-    host:'localhost',
+const sequelize = new Sequelize('ra065ji2wgqsb8vi','aqlipr84m2saw737','password',{
+    host:'u28rhuskh0x5paau.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
     dialect: 'mysql',
     // operatorsAliases: false,
     
