@@ -18,7 +18,7 @@ Clicking on an article will direct you to an the article's page, which includes 
 **Commenting on an Article**: If you are on an article page and you are logged in you may comment on an article by inputting text in the comment field and pressing the *Submit* Button. 
 Your comment will then be displayed below all other comments in the format *USERNAME: COMMENT*.
 
-##### Authentication:
+### Authentication:
 
 **Register**: Click on the *Register* Link on the Navigation Bar, then enter a username and password.
 You will be redirected to your Profile Page.
@@ -32,7 +32,7 @@ The Profile Page Displays your username along with all article titles that you h
 
 ---
 
-###Technologies:
+### Technologies:
 *Bcrypt
 *Bootstrap 5
 *Cors
