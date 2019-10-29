@@ -9,7 +9,7 @@ export default (props) => {
                 <Container>
                     <h1 style={{fontSize: 44}}>Vox Populi</h1>
                     <p style={{fontSize: 30}}>
-                        Komment yaz, be heard.
+                        Write comment, be heard.
                     </p>
                 </Container>
             </Jumbotron>
