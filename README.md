@@ -30,18 +30,33 @@ You will be redirected to your Profile Page.
 If you have not logged in, you will be redirected to the Login Page. 
 The Profile Page Displays your username along with all article titles that you have commented on.
 
+### Download and Run
+
+Once you have cloned the repository, make sure that you are in the correct directory and run the command 
+
+```
+npm  i
+```
+to install all node package dependencies. Once the installation is finished, run the command
+
+```
+npm  start
+```
+This will create two server instances- the client server will be hosted on Port 3000, 
+and the express server will be hosted on Port 3001.
+
 ---
 
 ### Technologies:
-*Bcrypt
-*Bootstrap 5
-*Cors
-*Dotenv
-*Express
-*If-env
-*JawsDB
-*Jsonwebtoken
-*Jwt-decode
-*MySQL
-*React
-*Sequelize
+* Bcrypt
+* Bootstrap 5
+* Cors
+* Dotenv
+* Express
+* If-env
+* JawsDB
+* Jsonwebtoken
+* Jwt-decode
+* MySQL
+* React
+* Sequelize
